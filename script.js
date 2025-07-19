@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 total: document.getElementById('order-total-price').textContent
             };
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwfuvTM9mtVGe96XYJ4wrcmn4w3bcrdt4eQLkKPxVSDLl6C6kEZnCHGOVLNi2NI39nk/exec'; 
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx9jzGq6a4810qGBWwZHlftvSemFd20kpTDSjuPQil2kb9aAR-W4FT_4UUtgjQwGSFS/exec'; 
 
             fetch(scriptURL, {
                 method: 'POST',
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             resultDiv.innerHTML = '<p>กำลังค้นหา...</p>';
             
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwfuvTM9mtVGe96XYJ4wrcmn4w3bcrdt4eQLkKPxVSDLl6C6kEZnCHGOVLNi2NI39nk/exec'; 
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx9jzGq6a4810qGBWwZHlftvSemFd20kpTDSjuPQil2kb9aAR-W4FT_4UUtgjQwGSFS/exec'; 
             const searchURL = `${scriptURL}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
             
             fetch(searchURL)
