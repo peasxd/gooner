@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ฟอร์มสั่งซื้อหนังสือ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>แบบฟอร์มสั่งซื้อหนังสือ</h1>
+  
+  <form id="orderForm">
+    <input type="text" name="name" placeholder="ชื่อ" required />
+    <input type="text" name="phone" placeholder="เบอร์โทร" required />
+    <textarea name="address" placeholder="ที่อยู่สำหรับจัดส่ง" required></textarea>
+    <textarea name="order" placeholder="รายการหนังสือที่สั่งซื้อ" required></textarea>
+    <input type="number" name="total" placeholder="ยอดรวม (บาท)" required />
+    <input type="email" name="gmail" placeholder="อีเมลผู้สั่งซื้อ (Gmail)" required />
+    <button type="submit">ส่งคำสั่งซื้อ</button>
+  </form>
+
+  <div class="status" id="status"></div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbySn1xvHFy-jY_L9nPtN8IL3oifgZhEqZs3Dk8bK63jr_hv5vavXYHGighCh_HEQk63/exec'; // <- เปลี่ยนตรงนี้
+    const form = document.getElementById('orderForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const jsonData = {};
+      formData.forEach((value, key) => jsonData[key] = value);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(jsonData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.text())
+      .then(responseText => {
+        status.textContent = '✅ ส่งข้อมูลเรียบร้อยแล้ว: ' + responseText;
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        status.textContent = '❌ เกิดข้อผิดพลาด: ' + error.message;
+      });
+    });
+  </script>
+
+</body>
+</html>
